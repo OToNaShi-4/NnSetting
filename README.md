@@ -1,4 +1,4 @@
-<div style="width: 100%;flex-direction: column;align-items: center;display: flex; justify-content: center;margin-top: 50px">
+<div align="center" style="width: 100%;flex-direction: column;align-items: center;display: flex; justify-content: center;margin-top: 50px">
     <p style="font-size: 55px;margin-bottom: 3px;line-height: 50px; color:white;background: #2ea9df;padding: 15px;border-radius: 7pt ">NnSetting</p>
     <p style="line-height: 4px;margin-top: 40px">⚠️  一款<b style="color: #2ea9df">通用型</b>多环境设置管理工具  ⚠️</p>
     <p style="line-height: 4px">⚠️ 彻底解决多套运行环境需要重复编写常量及设置内容  ⚠️</p>

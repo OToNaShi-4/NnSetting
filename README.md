@@ -1,7 +1,9 @@
-<div align="center" style="width: 100%;flex-direction: column;align-items: center;display: flex; justify-content: center;margin-top: 50px">
+<div align="center" >
 <img src="./static/logo.png"/> 
-    <p style="line-height: 4px;margin-top: 40px">⚠️  一款<b style="color: #2ea9df">通用型</b>多环境设置管理工具  ⚠️</p>
-    <p style="line-height: 4px">⚠️ 彻底解决多套运行环境需要重复编写常量及设置内容  ⚠️</p>
+    <p >⚠️  一款<b >通用型</b>多环境设置管理工具  ⚠️</p>
+    <p >⚠️ 彻底解决多套运行环境需要重复编写常量及设置内容  ⚠️</p>
+<img src="./static/pyhton_3.6.png" alt="">
+
 </div>
 
 <HR >
@@ -13,7 +15,6 @@
 
 
 
-<div style="background: rgba(125,185,222,0.2); padding: 10px;border-radius: 5pt">
 <p style="display: flex;align-items: center">
 项目全部代码都使用了
 <img src="./static/pyhton_3.6.png" alt="">
@@ -21,14 +22,10 @@
 </p>
 
 <p style="display: flex;align-items: center">
-同时也导致本项目需要在
-<img src="./static/pyhton_3.6.png" alt="">
-
-版本下运行
+同时也导致本项目需要在<img src="./static/pyhton_3.6.png" alt="">版本下运行
 </p>
 
-💡 提示: 有关 Python 的类型声明请参考 <a href="https://docs.python.org/zh-cn/3/library/typing.html">《官方文档》</a>
-</div>
+> 💡 提示: 有关 Python 的类型声明请参考 <a href="https://docs.python.org/zh-cn/3/library/typing.html">《官方文档》</a>
 
 ## 安装
 
@@ -81,9 +78,9 @@ setting: NnSetting[Type[MySetting]] = NnSetting(EnvSource('config'))
 
 ```python
 if __name__ == '__main__':
-    print(f'my_setting: {setting.my_setting}')
-    print(f'my_setting_2: {setting.my_setting_2}')
-    print(f'my_setting_3: {setting.my_setting_3}')
+    print(f'my_setting: {setting.cur.my_setting}')
+    print(f'my_setting_2: {setting.cur.my_setting_2}')
+    print(f'my_setting_3: {setting.cur.my_setting_3}')
 ```
 
 运行前先在环境变量中指定设置为我们先前所写的 MySetting
@@ -100,3 +97,68 @@ if __name__ == '__main__':
 ![](./static/result_2.png)
 
 我们可以看到，除了 my_setting_2 之外的设置都能正确读取， 并且切换设置并不需要修改我们的代码文件就可以实现方便切换
+
+## 进阶使用方法
+
+本工具灵活度非常度高，用户可根据自己的需求对系统进行一定程度对自定义和开发
+
+### 自定义设置源类
+
+在上面的入门案例中， 我们使用了 EnvSource 设置源， 这个类是负责从环境变量读取到用户指定的设置名称并传给 NnSetting。 NnSetting.cur 就会从用户所编写的所有设置类中查找与这个名称相符的类并传回来
+
+下面我们尝试自己写一个测试类，并从本地一个叫config.txt中读取设置名称的Source类
+
+首先我们创建一个 config.txt 文件，其内容如下：
+> my
+
+然后我们在创建我们自己的Source类：
+
+```python
+# 1. 导入Source 基类
+from NnSetting.Source import Source
+
+
+# 2. 创建自己的源类
+class FileSource(Source):
+
+    # 3.重写父类的name property方法, 并在这里返回我们从文件中获取到的名称
+    @property
+    def name(self) -> str:
+        # ⚠️ ： 为适配windows系统，打开本地文件时切记显式声明 utf-8 编码格式，否则可能会报错
+        with open('./config.txt', 'r', encoding='utf-8') as f:
+            return f.read()
+
+```
+
+到此我们就可以在初始化NnSetting 时将我们的 Source 类作为参数传给它了， 每次调用 setting.cur 时，代码会先从本地文件中读取名称再将其对应 的设置返回
+
+### 设置类的方法
+
+有时候我们经常需要多个设置中的变量进行组合，如果每次都要一个一个的从设置中取出会非常麻烦。 这个时候我们就可以在自己的设置类上编写类方法来避免重复劳动
+
+> ⚠️： 设置类的方法也是可以被继承的，我们要善用继承能力将 所有需要用到的字段都写在基类上 通过继承 来产生出多个设置分支
+
+```python
+from NnSetting import NnSetting, DefaultSettings, Property
+
+
+class MySetting(DefaultSettings):
+    my_setting: int = Property(0)  # 定义一个整数属性
+    my_setting_2: str = Property("lalalal")  # 定义一个字符串属性
+    my_setting_3: bool = Property(True)  # 定义一个布尔属性
+    my_setting_4: float = Property(0.0)  # 定义一个浮点属性
+    ...
+
+    # 现在我们需要将 2，3，4 组合成字典
+    @classmethod
+    def dict234(cls) -> dict:
+        return {
+            'my_setting_2': cls.my_setting_2,
+            'my_setting_3': cls.my_setting_3,
+            'my_setting_4': cls.my_setting_4,
+        }
+```
+
+
+## License
+This project is licensed under the terms of the MIT license.

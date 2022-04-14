@@ -1,11 +1,11 @@
 <div align="center" style="width: 100%;flex-direction: column;align-items: center;display: flex; justify-content: center;margin-top: 50px">
-    <p style="font-size: 55px;margin-bottom: 3px;line-height: 50px; color:white;background: #2ea9df;padding: 15px;border-radius: 7pt ">NnSetting</p>
+<img src="./static/logo.png"/> 
     <p style="line-height: 4px;margin-top: 40px">⚠️  一款<b style="color: #2ea9df">通用型</b>多环境设置管理工具  ⚠️</p>
     <p style="line-height: 4px">⚠️ 彻底解决多套运行环境需要重复编写常量及设置内容  ⚠️</p>
 </div>
 
 <HR >
-<p style="text-align: center;color: yellow">无需修改一行代码，即可实现多套设置间的无缝切换</p>
+<p align="center" style="text-align: center;color: yellow">无需修改一行代码，即可实现多套设置间的无缝切换</p>
 
 ## 项目说明
 
@@ -16,19 +16,14 @@
 <div style="background: rgba(125,185,222,0.2); padding: 10px;border-radius: 5pt">
 <p style="display: flex;align-items: center">
 项目全部代码都使用了
-<span style="display: inline-block;border-radius: 3pt;overflow: hidden;background: #2ea9df;font-size: 12px;color: white;margin:0 8px">
-        <span style="display: inline-block;background: #2ea9df;padding: 1px 5px">Python</span>
-        <span style="display: inline-block;background: #ffb11b;padding: 1px 5px;font-weight: 600">3.6 +</span>
-</span>
+<img src="./static/pyhton_3.6.png" alt="">
 的类型声明功能，将会为本项目使用时带来更好的使用体验和类型预测。
 </p>
 
 <p style="display: flex;align-items: center">
 同时也导致本项目需要在
-<span style="display: inline-block;border-radius: 3pt;overflow: hidden;background: #2ea9df;font-size: 12px;color: white;margin:0 8px">
-        <span style="display: inline-block;background: #2ea9df;padding: 1px 5px">Python</span>
-        <span style="display: inline-block;background: #ffb11b;padding: 1px 5px;font-weight: 600">3.6 +</span>
-</span>
+<img src="./static/pyhton_3.6.png" alt="">
+
 版本下运行
 </p>
 
@@ -36,7 +31,9 @@
 </div>
 
 ## 安装
-> 由于目前本项目尚未发布于 pypi 所以仅支持从源代码安装 
+
+> 由于目前本项目尚未发布于 pypi 所以仅支持从源代码安装
+
 ### 1. 从源代码中安装
 
 ```bash

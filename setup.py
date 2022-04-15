@@ -30,11 +30,11 @@ def read_requirements(filename):
 
 setup(
     name='NnSetting',
-    python_requires='>=3.7.0',
+    python_requires='>=3.6.0',
     version='1.0.0',  # 包的版本
     author='OToNaShi-4',
     author_email='517431682@qq.com',
-    url="https://gitee.com/otonashi-4/python_async_orm",
+    url="https://github.com/OToNaShi-4/NnSetting",
     description="一个通用型多环境设置管理工具",
     long_description_content_type="text/markdown",
     packages=["NonameOrm", '.'],

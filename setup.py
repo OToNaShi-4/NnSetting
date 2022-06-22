@@ -37,7 +37,7 @@ setup(
     url="https://github.com/OToNaShi-4/NnSetting",
     description="一个通用型多环境设置管理工具",
     long_description_content_type="text/markdown",
-    packages=["NonameOrm", '.'],
+    packages=["NnSetting", '.'],
     include_package_data=True,
     keywords=['asyncio', 'aiomysql', 'orm'],
     install_requires=read_requirements('requirements.txt'),
